@@ -1,4 +1,4 @@
-Migrator = function(fs, transform) {
+Migrator = function(fs) {
   var _this = this;
   this.fs = fs;
   var getFs = function(callback) {
@@ -40,11 +40,6 @@ Migrator = function(fs, transform) {
   };
 
   var readDb = function(ids, transform, callback) {
-    if (arguments.length < 3) {
-      callback = transform;
-      transform = null;
-    }
-
     var store = function(key, value, callback) {
       if (transform) {
         var ret = transform(key, value);
@@ -77,6 +72,10 @@ Migrator = function(fs, transform) {
   };
 
   this.migrateIfNecessary = function(ids, transform, callback) {
+    if (arguments.length < 3) {
+      callback = transform;
+      transform = null;
+    }
     getFs(function(err) {
       if (err) return callback(err);
       checkForMarker(function(err, present) {
