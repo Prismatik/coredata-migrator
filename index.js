@@ -22,7 +22,7 @@ Migrator = function(fs) {
       if (!err) return callback(new Error('something went wrong attempting to read the migration marker'));
       return callback(err);
     };
-    this.fs.root.getFile('migrated', {create: false, exclusive: false}, success, failure);
+    _this.fs.root.getFile('migrated', {create: false, exclusive: false}, success, failure);
   };
 
   var setMarker = function(callback) {
@@ -36,7 +36,7 @@ Migrator = function(fs) {
       };
       fileHandle.createWriter(writeSuccess, callback);
     };
-      this.fs.root.getFile('migrated', {create: true, exclusive: false}, success, callback);
+      _this.fs.root.getFile('migrated', {create: true, exclusive: false}, success, callback);
   };
 
   var readDb = function(ids, transform, callback) {
