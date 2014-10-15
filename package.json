@@ -1,0 +1,20 @@
+{
+  "name": "coredata-migrator",
+  "version": "1.0.0",
+  "description": "This module handles migrating key-value data stored in iOS' CoreData to localStorage for use by Cordova.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prismatik/coredata-migrator.git"
+  },
+  "author": "david@banham.id.au",
+  "license": "Proprietary",
+  "bugs": {
+    "url": "https://github.com/Prismatik/coredata-migrator/issues"
+  },
+  "homepage": "https://github.com/Prismatik/coredata-migrator",
+  "private": true
+}
