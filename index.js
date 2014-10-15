@@ -68,7 +68,11 @@ Migrator = function(fs) {
       }
       callback(null);
     };
-    db.executeSql('SELECT '+ids.keyCol+', '+ids.valCol+' FROM '+ids.table, [], rowHandler);
+    var failure = function(err) {
+      if (err.message === 'no such table: '+ids.table) return callback(null);
+      return callback(err);
+    };
+    db.executeSql('SELECT '+ids.keyCol+', '+ids.valCol+' FROM '+ids.table, [], rowHandler, failure);
   };
 
   this.migrateIfNecessary = function(ids, transform, callback) {
