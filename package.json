@@ -1,6 +1,6 @@
 {
   "name": "coredata-migrator",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "This module handles migrating key-value data stored in iOS' CoreData to localStorage for use by Cordova.",
   "main": "index.js",
   "scripts": {
