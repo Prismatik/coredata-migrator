@@ -16,5 +16,8 @@
     "url": "https://github.com/Prismatik/coredata-migrator/issues"
   },
   "homepage": "https://github.com/Prismatik/coredata-migrator",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "cordova-datastore": "git+ssh://git@github.com/Prismatik/cordova-datastore.git#v1.0.0"
+  }
 }

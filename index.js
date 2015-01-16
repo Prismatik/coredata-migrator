@@ -1,3 +1,4 @@
+var ds = require('cordova-datastore');
 Migrator = function(fs) {
   var _this = this;
   this.fs = fs;
@@ -47,8 +48,9 @@ Migrator = function(fs) {
         value = ret.value;
       };
 
-      localStorage.setItem(key, JSON.stringify(value));
-      return callback(null);
+      ds.setItem(key, JSON.stringify(value), function(err) {
+        return callback(err);
+      });
     };
 
     var db = sqlitePlugin.openDatabase({name: 'french_glossary_7_1.sqlite'});
@@ -75,19 +77,22 @@ Migrator = function(fs) {
     db.executeSql('SELECT '+ids.keyCol+', '+ids.valCol+' FROM '+ids.table, [], rowHandler, failure);
   };
 
-  this.migrateIfNecessary = function(ids, transform, callback) {
-    if (arguments.length < 3) {
+  this.migrateIfNecessary = function(ids, dsName, transform, callback) {
+    if (arguments.length < 4) {
       callback = transform;
       transform = null;
     }
-    getFs(function(err) {
+    dataStore.init(dsName, function(err) {
       if (err) return callback(err);
-      checkForMarker(function(err, present) {
+      getFs(function(err) {
         if (err) return callback(err);
-        if (present) return callback(false);
-        readDb(ids, transform, function(err) {
+        checkForMarker(function(err, present) {
           if (err) return callback(err);
-          setMarker(callback);
+          if (present) return callback(false);
+          readDb(ids, transform, function(err) {
+            if (err) return callback(err);
+            setMarker(callback);
+          });
         });
       });
     });
