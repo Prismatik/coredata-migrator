@@ -82,7 +82,7 @@ Migrator = function(fs) {
       callback = transform;
       transform = null;
     }
-    dataStore.init(dsName, function(err) {
+    _this.ds.init(dsName, function(err) {
       if (err) return callback(err);
       getFs(function(err) {
         if (err) return callback(err);
