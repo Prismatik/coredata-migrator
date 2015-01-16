@@ -1,4 +1,4 @@
-var ds = require('cordova-datastore');
+var ds = require('cordova-datastore')();
 Migrator = function(fs) {
   var _this = this;
   this.fs = fs;
